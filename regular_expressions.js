@@ -3,7 +3,7 @@
 // Determine whether a string contains a nomor KTP
 const has_ktp = (string) => {
   // ...
-  let ktp = /(\d{3}-)(\d{2}-)(\d{4})/
+  let ktp = /\d{3}-\d{2}-\d{4}/
 
   return ktp.test(string)
 }
@@ -19,7 +19,7 @@ console.log(has_ktp('please confirm your identity: XXX-XX-1422') === false) // t
 //Return the Social Security number from a string.
 const grab_ktp = (string) => {
   // ...
-  let patternKtp = /(\d{3})-(\d{2})-(\d{4})/g
+  let patternKtp = /\d{3}-\d{2}-\d{4}/g
   let ktp = string.match(patternKtp);
   if (patternKtp.test(string)) {
     return ktp.join("")
@@ -39,7 +39,7 @@ console.log(grab_ktp('please confirm your identity: XXX-XX-1422') === null) // t
 // Return all of the Social Security numbers from a string.
 const grab_all_nomor_ktp = (string) => {
   // ...
-  let ktp = /(\d{3})-(\d{2})-(\d{4})/g;
+  let ktp = /\d{3}-\d{2}-\d{4}/g;
   let hasil = string.match(ktp);
   if (ktp.test(string)) return hasil;
   else return [];
