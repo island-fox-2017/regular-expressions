@@ -2,7 +2,7 @@
 
 // Determine whether a string contains a nomor KTP
 const has_ktp = (string) => {
-  // ...
+  console.log(string.match(/\d{3}-\d{2}-\d{4}/g));
 }
 
 console.log('has_ktp if it has what looks like a nomor KTP')
@@ -15,7 +15,8 @@ console.log(has_ktp('please confirm your identity: XXX-XX-1422') === false) // t
 
 // Return the Social Security number from a string.
 const grab_ktp = (string) => {
-  // ...
+  let push = string.match(/\d{3}-\d{2}-\d{4}/g);
+  if (push) return push[0]; else return null;
 }
 
 console.log('grab_ktp returns nomor KTP if the string has an nomor KTP')
@@ -28,7 +29,9 @@ console.log(grab_ktp('please confirm your identity: XXX-XX-1422') === null) // t
 
 // Return all of the Social Security numbers from a string.
 const grab_all_nomor_ktp = (string) => {
-  // ...
+  let result = [], push = string.match(/\d{3}-\d{2}-\d{4}/gi);
+  if (push) result.push(push); else return result;
+  return result[0];
 }
 
 console.log('grab_all_nomor_ktp returns all nomor KTP if the string has any nomor KTP')
@@ -41,7 +44,7 @@ console.log(grab_all_nomor_ktp('please confirm your identity: XXX-XX-1422')) // 
 
 // Obfuscate all of the nomor KTP in a string. Example: XXX-XX-4430.
 const hide_all_nomor_ktp = (string) => {
-  // ...
+  return string.replace(/\d{3}-\d{2}/g, 'XXX-XX');
 }
 
 console.log('hide_all_nomor_ktp obfuscates any nomor KTP in the string')
@@ -57,7 +60,16 @@ console.log(hide_all_nomor_ktp(hideString) === hideString) // true
 // Ensure all of the Social Security numbers use dashes for delimiters.
 // Example: 480.01.4430 and 480014430 would both be 480-01-4430.
 const format_nomor = (string) => {
-  // ...
+  let okay = 0;
+  string = string.replace(/[!\-@#$%^&*()+=/|.,;]/g, '').split(' ');
+  for (let i = 0; i < string.length; i++) {
+    string[i] = string[i].replace(/(\d{3})(\d{2})(\d{4})/g, '$1-$2-$3');
+    if (string[i].match(/\d{3}-\d{2}-\d{4}/g)) okay++;
+  }
+  if (okay > 0)
+    return string.join(', ');
+  else
+    return string.join(' ');
 }
 
 console.log('format_nomor finds and reformat any nomor KTP in the string')
