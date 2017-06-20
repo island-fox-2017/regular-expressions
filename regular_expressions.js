@@ -2,7 +2,9 @@
 
 // Determine whether a string contains a nomor KTP
 const has_ktp = (string) => {
-  // ...
+  let check_ktp1 = /\d{3,3}-\d{2,2}-\d{4,4}/
+  return check_ktp1.test(string)
+
 }
 
 console.log('has_ktp if it has what looks like a nomor KTP')
@@ -15,8 +17,17 @@ console.log(has_ktp('please confirm your identity: XXX-XX-1422') === false) // t
 
 // Return the Social Security number from a string.
 const grab_ktp = (string) => {
-  // ...
+  let check_ktp2 = /\d{3,3}-\d{2,2}-\d{4,4}/;
+  let getKtp = check_ktp2.exec(string);
+    
+    if(check_ktp2.test(string)){
+      return getKtp.toString()
+    }else {
+      return null
+    }
+    
 }
+
 
 console.log('grab_ktp returns nomor KTP if the string has an nomor KTP')
 console.log(grab_ktp("please don't share this: 234-60-1422") === '234-60-1422') // true
@@ -28,7 +39,14 @@ console.log(grab_ktp('please confirm your identity: XXX-XX-1422') === null) // t
 
 // Return all of the Social Security numbers from a string.
 const grab_all_nomor_ktp = (string) => {
-  // ...
+  let check_ktp3 = /\d{3,3}-\d{2,2}-\d{4,4}/g
+  let getKtp = string.match(check_ktp3)
+    if(getKtp !== null){
+      return getKtp
+    }else {
+      return []
+    }
+  
 }
 
 console.log('grab_all_nomor_ktp returns all nomor KTP if the string has any nomor KTP')
@@ -37,11 +55,13 @@ console.log(grab_all_nomor_ktp('234-60-1422, 350-80-0744, 013-60-8762')) // retu
 console.log("grab_all_nomor_ktp returns an empty Array if it doesn't have any nomor KTP")
 console.log(grab_all_nomor_ktp('please confirm your identity: XXX-XX-1422')) // return []
 
-// -----------------------------------------------------------------------------
-
+// // -----------------------------------------------------------------------------
+// 
 // Obfuscate all of the nomor KTP in a string. Example: XXX-XX-4430.
 const hide_all_nomor_ktp = (string) => {
-  // ...
+  let check_ktp4 = /(\d{3,3})-(\d{2,2})-(\d{4,4})/g
+  let replaceKtp = string.replace(check_ktp4, 'XXX-XX-$3')
+  return replaceKtp
 }
 
 console.log('hide_all_nomor_ktp obfuscates any nomor KTP in the string')
@@ -53,11 +73,13 @@ let hideString = 'please confirm your identity: XXX-XX-1422'
 console.log(hide_all_nomor_ktp(hideString) === hideString) // true
 
 // -----------------------------------------------------------------------------
-
+// 
 // Ensure all of the Social Security numbers use dashes for delimiters.
 // Example: 480.01.4430 and 480014430 would both be 480-01-4430.
 const format_nomor = (string) => {
-  // ...
+  let check_ktp5 = /(\d{3,3})[.]*(\d{2,2})[.]*(\d{4,4})/g
+  let result = string.replace(check_ktp5, '$1-$2-$3')
+  return result
 }
 
 console.log('format_nomor finds and reformat any nomor KTP in the string')
@@ -72,5 +94,6 @@ module.exports = {
   has_ktp,
   grab_ktp,
   grab_all_nomor_ktp,
-  hide_all_nomor_ktp
+  hide_all_nomor_ktp,
+  format_nomor
 }
