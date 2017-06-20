@@ -61,7 +61,7 @@ console.log(hide_all_nomor_ktp(hideString) === hideString) // true
 // Ensure all of the Social Security numbers use dashes for delimiters.
 // Example: 480.01.4430 and 480014430 would both be 480-01-4430.
 const format_nomor = (string) => {
-  let pattern = /(\d{3,3})[.,]*(\d{2,2})[.,]*(\d{4,4})/g;
+  let pattern = /(\d{3,3}).?(\d{2,2}).?(\d{4,4})/g;
   return string.replace(pattern, `$1-$2-$3`)
 }
 
