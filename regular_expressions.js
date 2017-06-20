@@ -1,21 +1,32 @@
 'use strict'
 
-// Determine whether a string contains a nomor KTP
+// // Determine whether a string contains a nomor KTP
 const has_ktp = (string) => {
-  // ...
+  let polaKTP = /\d{3,3}-\d{2,2}-\d{4,4}/;
+  if(string.match(polaKTP)){
+    return true;
+  } else {
+    return false;
+  }
 }
 
-console.log('has_ktp if it has what looks like a nomor KTP')
-console.log(has_ktp("please don't share this: 234-60-1422") === true) // true
+console.log("has_ktp if it has what looks like a nomor KTP");
+console.log(has_ktp("please don't share this: 234-60-1422") === true); // true
 
-console.log("has_ktp if it doesn't have a nomor KTP")
+console.log("has_ktp if it doesn't have a nomor KTP");
 console.log(has_ktp('please confirm your identity: XXX-XX-1422') === false) // true
-
-// -----------------------------------------------------------------------------
-
-// Return the Social Security number from a string.
+//
+// // -----------------------------------------------------------------------------
+//
+// // Return the Social Security number from a string.
 const grab_ktp = (string) => {
-  // ...
+  let polaKTP = /\d{3,3}-\d{2,2}-\d{4,4}/;
+  if(string.match(polaKTP)){
+    //console.log(string.match(polaKTP)[0]);
+    return string.match(polaKTP)[0];
+  } else {
+    return null;
+  }
 }
 
 console.log('grab_ktp returns nomor KTP if the string has an nomor KTP')
@@ -28,7 +39,16 @@ console.log(grab_ktp('please confirm your identity: XXX-XX-1422') === null) // t
 
 // Return all of the Social Security numbers from a string.
 const grab_all_nomor_ktp = (string) => {
-  // ...
+  let polaKTP = /\d{3,3}-\d{2,2}-\d{4,4}/;
+// for(let i = 0; i < string.split(',').length; i++){
+  if(string.match(polaKTP)){
+    let x = string.match(polaKTP);
+    // console.log(x.input.split(','));
+    return x.input.split(',');
+  } else {
+    return [];
+  }
+// }
 }
 
 console.log('grab_all_nomor_ktp returns all nomor KTP if the string has any nomor KTP')
@@ -41,7 +61,22 @@ console.log(grab_all_nomor_ktp('please confirm your identity: XXX-XX-1422')) // 
 
 // Obfuscate all of the nomor KTP in a string. Example: XXX-XX-4430.
 const hide_all_nomor_ktp = (string) => {
-  // ...
+    let polaKTP = /\d{3,3}-\d{2,2}-\d{4,4}/;
+    let ktpbank = [];
+
+    if(string.match(polaKTP)){
+      let x = string.match(polaKTP).input.split(',');
+
+      //console.log(string.match(polaKTP)[0]);
+      for(let i = 0; i < x.length; i++) {
+
+      // console.log(x.length);
+        ktpbank.push(x[i].replace(/\d{3,3}-\d{2,2}/, "XXX-XX"));
+      }
+      } else { return []; }
+
+    return ktpbank.join('');
+
 }
 
 console.log('hide_all_nomor_ktp obfuscates any nomor KTP in the string')
@@ -52,10 +87,10 @@ console.log('hide_all_nomor_ktp does not alter a string without nomor KTP in it'
 let hideString = 'please confirm your identity: XXX-XX-1422'
 console.log(hide_all_nomor_ktp(hideString) === hideString) // true
 
-// -----------------------------------------------------------------------------
-
-// Ensure all of the Social Security numbers use dashes for delimiters.
-// Example: 480.01.4430 and 480014430 would both be 480-01-4430.
+// // -----------------------------------------------------------------------------
+//
+// // Ensure all of the Social Security numbers use dashes for delimiters.
+// // Example: 480.01.4430 and 480014430 would both be 480-01-4430.
 const format_nomor = (string) => {
   // ...
 }
