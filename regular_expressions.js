@@ -93,6 +93,46 @@ console.log(hide_all_nomor_ktp(hideString) === hideString) // true
 // // Example: 480.01.4430 and 480014430 would both be 480-01-4430.
 const format_nomor = (string) => {
   // ...
+  // ambil masukan
+  // pecah masukan menjadi array dengan split (',')
+  //tentukan pattern polaKTP, pattern dg dot (nnti di replace), dan patternNonFormat
+  //buat output array
+  //buat parameter penampung nonPola
+    //buat perulangan sebanyak panjang array yang sebelumnya dibuat
+      //buat 3 kondisi
+      //pertama - jika masukan sesuai dengan polaKTP maka kembalikan isi array
+        //push hasil ke output array
+      //kedua - jika masukan sesuai dengan polaDOT maka replace dot dengan dash
+        //push hasil ke output array
+      //ketiga - jika tidak sesuai dengan polaDOT dan polaKTP tp sama dengan patternNonFormat maka replace sesuai polaKTP
+        //push hasil ke output array
+      // else return false
+    //endfor
+  //return output array
+
+  let polaKTP = /\d{3,3}-\d{2,2}-\d{4,4}/;
+  let polaDOT = /\d{3,3}.\d{2,2}.\d{4,4}/;
+  let nonPola = /\d{9,9}/;
+
+  let reFormat = [];
+  let nonpola = '';
+  let input = string.split(',');
+
+  for(let i = 0; i < input.length; i++){
+    if(input[i].match(polaKTP)){
+      reFormat.push(input[i]);
+    } else if(input[i].match(polaDOT)){
+      reFormat.push(input[i].replace('.','-'));
+    } else if(input[i].match(nonPola)){
+      //reFormat.push(input[i].replace('nonPola','polaKTP'));
+      // reFormat.push(input[i]);
+      let non = input[i].toString().split('');
+      reFormat.push(non[0] + non[1] + non[2]+'-'+non[3] + non[4]+'-'+non[5] + non[6] + non[7] + non[8]);
+      // let x = (non[0] non[1] non[2]+'-'+non[3] non[4]+'-'+non[5] non[6] non[7] non[8]);
+      // reFormat.push(x);
+    }
+  }
+console.log(reFormat.join(''));
 }
 
 console.log('format_nomor finds and reformat any nomor KTP in the string')
