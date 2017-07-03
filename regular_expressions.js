@@ -4,11 +4,11 @@
 const has_ktp = (string) => {
   // ...
   var detil = string.match(/\d{3}-\d{2}-\d{4}/ig);
-if (detil != null) {
-  return true;
-} else {
-  return false;
-}
+  if(detil != null) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 console.log('has_ktp if it has what looks like a nomor KTP')
@@ -23,11 +23,11 @@ console.log(has_ktp('please confirm your identity: XXX-XX-1422') === false) // t
 const grab_ktp = (string) => {
   // ...
   var detil = string.match(/\d{3}-\d{2}-\d{4}/ig);
- if (detil != null) {
-   return detil[0];
- } else {
-   return detil;
- }
+  if (detil != null) {
+    return detil[0];
+  } else {
+    return detil;
+  }
 }
 
 console.log('grab_ktp returns nomor KTP if the string has an nomor KTP')
@@ -43,11 +43,11 @@ const grab_all_nomor_ktp = (string) => {
   // ...
   var detil = string.match(/\d{3}-\d{2}-\d{4}/ig);
 
- if (detil != null) {
-   return detil;
- } else {
-   return [];
- }
+   if (detil != null) {
+     return detil;
+   } else {
+     return [];
+   }
 }
 
 console.log('grab_all_nomor_ktp returns all nomor KTP if the string has any nomor KTP')
@@ -61,19 +61,19 @@ console.log(grab_all_nomor_ktp('please confirm your identity: XXX-XX-1422')) // 
 // Obfuscate all of the nomor KTP in a string. Example: XXX-XX-4430.
 const hide_all_nomor_ktp = (string) => {
   // ...
-  var detil = string.match(/\d{3}-\d{2}-\d{4}/ig);
-if (detil === null) {
-  return string;
-} else {
-  var iterasi = detil.length;
-  for (let i=0; i < iterasi; i++) {
-    var tetap = detil[i].match(/\d{4}/i);
-    var ekses = 'XXX-XX-'
-    detil[i] = ekses.concat(tetap);
-  }
-
-  return detil;
-}
+//   var detil = string.match(/\d{3}-\d{2}-\d{4}/ig);
+// if (detil === null) {
+//   return string;
+// } else {
+//   var iterasi = detil.length;
+//   for (let i=0; i < iterasi; i++) {
+//     var tetap = detil[i].match(/\d{4}/i);
+//     var ekses = 'XXX-XX-'
+//     detil[i] = ekses.concat(tetap);
+//   }
+//
+//   return detil;
+// }
 }
 
 console.log('hide_all_nomor_ktp obfuscates any nomor KTP in the string')
@@ -90,24 +90,24 @@ console.log(hide_all_nomor_ktp(hideString) === hideString) // true
 // Example: 480.01.4430 and 480014430 would both be 480-01-4430.
 const format_nomor = (string) => {
   // ...
-  var detil = string.match(/\d{9}|(\d{3}.\d{2}.\d{4})/g);
-
- if (detil === null) {
-   return string;
- } else {
-   for (let i=0; i<detil.length; i++) {
-     var nomor = detil[i].split('');
-     if (nomor.length>9) {
-         nomor.splice(3,1, '-');
-         nomor.splice(6,1, '-');
-       } else {
-         nomor.splice(3,0, '-');
-         nomor.splice(6,0, '-');
-       }
-     detil[i] = nomor.join('');
-   }
-   return detil.join(', ');
- }
+ //  var detil = string.match(/\d{9}|(\d{3}.\d{2}.\d{4})/g);
+ //
+ // if (detil === null) {
+ //   return string;
+ // } else {
+ //   for (let i=0; i<detil.length; i++) {
+ //     var nomor = detil[i].split('');
+ //     if (nomor.length>9) {
+ //         nomor.splice(3,1, '-');
+ //         nomor.splice(6,1, '-');
+ //       } else {
+ //         nomor.splice(3,0, '-');
+ //         nomor.splice(6,0, '-');
+ //       }
+ //     detil[i] = nomor.join('');
+ //   }
+ //   return detil.join(', ');
+ // }
 }
 
 console.log('format_nomor finds and reformat any nomor KTP in the string')
